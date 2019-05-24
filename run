@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+
+WORKSPACE="/tmp/build"
+
+rsync -aAX --delete "`pwd`/" --exclude={".git/*",".heroku/*","node_modules/*"} "${WORKSPACE}"
+
+ENV_FILE="${WORKSPACE}/.env"
+
+PARAMS=""
+
+old_IFS=$IFS;
+IFS='
+';
+filelines=`cat $ENV_FILE`
+for line in $filelines ; do
+    KEY=$(echo ${line} | cut -d= -f1)
+    IFS="=" read ${KEY} VALUE <<< "${line}"
+    # echo "KEY: ${KEY}"
+    # echo "VALUE: ${VALUE}"
+    PARAMS="${PARAMS} -e ${KEY}=${VALUE}"
+done;
+IFS=${old_IFS};
+
+docker run --rm -it \
+-e USER=vchavkov \
+-e PORT=5000 \
+$PARAMS \
+-v "${WORKSPACE}":/app \
+vchavkov/run \
+/bin/bash

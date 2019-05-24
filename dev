@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+
+WWW_ROOT="`pwd`"
+
+cp -f "${WWW_ROOT}/config.development.json.tpl" "${WWW_ROOT}/config.development.json";
+
+printf "\nPATH: ${WWW_ROOT}\n\n";
+
+# detect OS
+unameOut="$(uname -s)"
+case "${unameOut}" in
+    Linux*)     SED=sed;;
+    Darwin*)    SED=gsed;;
+    CYGWIN*)    SED=sed;;
+    MINGW*)     SED=sed;;
+    *)          SED=sed;;
+esac
+echo ${machine}
+
+gsed -e "s|#WWW_ROOT#|${WWW_ROOT}|g" -i "$WWW_ROOT/config.development.json";
+
+printf "${WWW_ROOT}/config.development.json\n\n"
+cat "${WWW_ROOT}/config.development.json";
+
+NODE_ENV="development" DEBUG=ghost:*,knex:*,ghost-config node node_modules/ghost/index.js

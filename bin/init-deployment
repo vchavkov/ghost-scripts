@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+printf "\n-----> Initializing the deployment"
+
+printf "\n-----> create-config\n"
+bin/create-config
+
+printf "\n-----> config.production.json\n\n"
+cat "config.production.json"
+
+printf "\n"
+bin/wait-for-db
+
+knex-migrator init --mgpath node_modules/ghost
