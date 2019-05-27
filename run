@@ -12,11 +12,13 @@ old_IFS=$IFS;
 IFS='
 ';
 filelines=`cat $ENV_FILE`
+printf "
+Environment Variables:
+======================\n"
 for line in $filelines ; do
     KEY=$(echo ${line} | cut -d= -f1)
     IFS="=" read ${KEY} VALUE <<< "${line}"
-    # echo "KEY: ${KEY}"
-    # echo "VALUE: ${VALUE}"
+    printf "${KEY}: ${VALUE}\n"
     PARAMS="${PARAMS} -e ${KEY}=${VALUE}"
 done;
 IFS=${old_IFS};
@@ -24,6 +26,7 @@ IFS=${old_IFS};
 docker run --rm -it \
 -e USER=vchavkov \
 -e PORT=5000 \
+-e TRACE=true \
 $PARAMS \
 -v "${WORKSPACE}":/app \
 vchavkov/run \
