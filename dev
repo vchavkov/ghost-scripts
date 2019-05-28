@@ -2,6 +2,8 @@
 
 WWW_ROOT="`pwd`"
 
+ENV_FILE="${WWW_ROOT}/.env"
+
 cp -f "${WWW_ROOT}/config.development.json.tpl" "${WWW_ROOT}/config.development.json";
 
 printf "\nPATH: ${WWW_ROOT}\n\n";
@@ -18,7 +20,18 @@ esac
 
 printf "OS: ${machine}";
 
-${SED_CMD} -e "s|#WWW_ROOT#|${WWW_ROOT}|g" -i "$WWW_ROOT/config.development.json";
+${SED_CMD} -e "s|%WWW_ROOT%|${WWW_ROOT}|g" -i "$WWW_ROOT/config.development.json";
+
+old_IFS=$IFS;
+IFS='
+';
+filelines=`cat $ENV_FILE`
+for line in $filelines ; do
+    KEY=$(echo ${line} | cut -d= -f1)
+    IFS="=" read ${KEY} VALUE <<< "${line}"
+    sed -i "s/%${KEY}%/${VALUE//&/\\&}/g" "$WWW_ROOT/config.development.json";
+done;
+IFS=${old_IFS};
 
 printf "${WWW_ROOT}/config.development.json\n\n"
 cat "${WWW_ROOT}/config.development.json";
