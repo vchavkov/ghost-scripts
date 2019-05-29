@@ -62,8 +62,7 @@
             }
         },
         "gmaps_key": "AIzaSyDNxNrchaHYQ0rDIpJddFghtvUlQH5qy28",
-        "contact_form_subscribers": "vchavkov@assistance.bg",
-        "contact_form_subscribers_bak": "sales@aclass.bg, a1nadzor@abv.bg, jorolll@gmail.com, georgi@gmreklama.com",
+        "contact_form_subscribers": "vchavkov@assistance.bg, support@assistance.bg",
         "debug": 1,
         "jshint": 0,
         "production": 0,
