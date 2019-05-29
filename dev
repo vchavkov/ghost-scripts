@@ -20,7 +20,7 @@ esac
 
 printf "OS: ${machine}";
 
-${SED_CMD} -e "s|%WWW_ROOT%|${WWW_ROOT}|g" -i "$WWW_ROOT/config.development.json";
+${SED_CMD} -e "s#%WWW_ROOT%#${WWW_ROOT}#g" -i "$WWW_ROOT/config.development.json";
 
 old_IFS=$IFS;
 IFS='
@@ -29,7 +29,7 @@ filelines=`cat $ENV_FILE`
 for line in $filelines ; do
     KEY=$(echo ${line} | cut -d= -f1)
     IFS="=" read ${KEY} VALUE <<< "${line}"
-    sed -i "s/%${KEY}%/${VALUE//&/\\&}/g" "$WWW_ROOT/config.development.json";
+    sed -i "s|%${KEY}%|${VALUE}|g" "$WWW_ROOT/config.development.json";
 done;
 IFS=${old_IFS};
 
@@ -39,4 +39,4 @@ cat "${WWW_ROOT}/config.development.json";
 # logs
 mkdir -p ${WWW_ROOT}/content/logs
 
-NODE_ENV="development" DEBUG=ghost:*,knex:*,ghost-config node node_modules/ghost/index.js
+# NODE_ENV="development" DEBUG=ghost:*,knex:*,ghost-config node node_modules/ghost/index.js
