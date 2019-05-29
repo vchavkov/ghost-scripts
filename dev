@@ -39,4 +39,4 @@ cat "${WWW_ROOT}/config.development.json";
 # logs
 mkdir -p ${WWW_ROOT}/content/logs
 
-# NODE_ENV="development" DEBUG=ghost:*,knex:*,ghost-config node node_modules/ghost/index.js
+NODE_ENV="development" DEBUG=ghost:*,knex:*,ghost-config node node_modules/ghost/index.js
