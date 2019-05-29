@@ -6,7 +6,7 @@ ENV_FILE="${WWW_ROOT}/.env"
 
 cp -f "${WWW_ROOT}/config.development.json.tpl" "${WWW_ROOT}/config.development.json";
 
-printf "\nPATH: ${WWW_ROOT}\n\n";
+# printf "\nPATH: ${WWW_ROOT}\n\n";
 
 # detect OS
 unameOut="$(uname -s)"
@@ -17,8 +17,6 @@ case "${unameOut}" in
     MINGW*)     SED_CMD=sed;;
     *)          SED_CMD=sed;;
 esac
-
-printf "OS: ${machine}";
 
 ${SED_CMD} -e "s#%WWW_ROOT%#${WWW_ROOT}#g" -i "$WWW_ROOT/config.development.json";
 
