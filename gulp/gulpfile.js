@@ -106,8 +106,8 @@ gulp.task('css', function () {
         .pipe(concat(config.css_out_name))
         .pipe(cleancss())
         .pipe(sourcemaps.write('.'))
-        .pipe(header(banner, {package: package}))
-        .pipe(rename({suffix: '.min'}))
+        .pipe(header(banner, { package: package }))
+        .pipe(rename({ suffix: '.min' }))
         .pipe(gulp.dest(config.css_out))
         .pipe(gulpif(package.config.debug, debug()));
 });
@@ -117,7 +117,7 @@ gulp.task('css-vendor', function () {
         .pipe(gulpif(package.config.debug, debug())).on('error', swallowError)
         .pipe(concat(config.css_vendor_out_name))
         .pipe(sourcemaps.write('.'))
-        .pipe(rename({suffix: '.min'}))
+        .pipe(rename({ suffix: '.min' }))
         .pipe(gulp.dest(config.css_out))
         .pipe(gulpif(package.config.debug, debug()));
 });
@@ -133,7 +133,7 @@ gulp.task('css-opt', function () {
     return gulp.src(config.css_opt_in)
         .pipe(gulpif(package.config.debug, debug()))
         .on('error', swallowError)
-        .pipe(rename({suffix: '.min'}))
+        .pipe(rename({ suffix: '.min' }))
         .pipe(gulp.dest(config.css_opt_out))
         .pipe(gulpif(package.config.debug, debug()));
 });
@@ -145,8 +145,8 @@ gulp.task('js', function () {
         .pipe(gulpif(package.config.jshint, jshint.reporter('default')))
         .pipe(concat(config.js_out_name))
         .pipe(uglify())
-        .pipe(header(banner, {package: package}))
-        .pipe(rename({suffix: '.min'}))
+        .pipe(header(banner, { package: package }))
+        .pipe(rename({ suffix: '.min' }))
         .pipe(gulp.dest(config.js_out))
         .pipe(gulpif(package.config.debug, debug()));
 });
@@ -155,7 +155,7 @@ gulp.task('js-vendor-header', function () {
     return gulp.src(package.config.js_deps_header)
         .pipe(gulpif(package.config.debug, debug()))
         .pipe(concat(config.js_vendor_header_out_name))
-        .pipe(rename({suffix: '.min'}))
+        .pipe(rename({ suffix: '.min' }))
         .pipe(gulp.dest(config.js_vendor_out))
         .pipe(gulpif(package.config.debug, debug()));
 });
@@ -171,7 +171,7 @@ gulp.task('js-vendor-footer', function () {
     return gulp.src(package.config.js_deps_footer)
         .pipe(gulpif(package.config.debug, debug()))
         .pipe(concat(config.js_vendor_footer_out_name))
-        .pipe(rename({suffix: '.min'}))
+        .pipe(rename({ suffix: '.min' }))
         .pipe(gulp.dest(config.js_vendor_out))
         .pipe(gulpif(package.config.debug, debug()));
 });
@@ -188,7 +188,7 @@ gulp.task('js-opt', function () {
         .pipe(gulpif(package.config.debug, debug()))
         .pipe(gulpif(package.config.production, uglify()))
         .pipe(ext_replace('.js', '.min.js'))
-        .pipe(rename({suffix: '.min'}))
+        .pipe(rename({ suffix: '.min' }))
         .pipe(gulp.dest(config.js_opt_out))
         .pipe(gulpif(package.config.debug, debug()));
 });
@@ -259,10 +259,8 @@ gulp.task('reload', function () {
 
 gulp.task('serve', ['sass'], function () {
     browserSync({
-        server: config.src,
         proxy: "http://localhost:2300/"
     });
-
     gulp.watch([config.htmlin, config.js_in], ['reload']);
     gulp.watch(config.scss_in, ['sass']);
 });
@@ -287,7 +285,6 @@ gulp.task('default', [
 ], function () {
 
     browserSync({
-        // server: config.src,
         proxy: "http://localhost:2300/"
     });
 
