@@ -39,4 +39,4 @@ mkdir -p ${WWW_ROOT}/content/logs
 
 NODE_ENV="development" \
 # DEBUG=ghost:*,knex:*,ghost-config \
-nodemon node_modules/ghost/index.js
+npx nodemon node_modules/ghost/index.js
