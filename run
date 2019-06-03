@@ -23,10 +23,13 @@ for line in $filelines ; do
 done;
 IFS=${old_IFS};
 
+printf "\n";
+
+# -e TRACE=false \
+
 docker run --rm -it \
 -e USER=vchavkov \
 -e PORT=5000 \
--e TRACE=false \
 $PARAMS \
 -v "${WORKSPACE}":/app \
 vchavkov/run \

@@ -6,7 +6,7 @@ var path = require('path');
 var url = require('url');
 
 var envValues = require('./common/env-values');
-var appRoot = path.join(__dirname, '..');
+var appRoot = path.join(__dirname, '../../');
 
 function createConfig() {
     var fileStorage, storage;

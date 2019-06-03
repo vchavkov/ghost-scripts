@@ -11,4 +11,4 @@ cat "config.production.json"
 printf "\n"
 scripts/bin/wait-for-db
 
-knex-migrator init --mgpath node_modules/ghost
+# npx knex-migrator init --mgpath /app/node_modules/ghost
