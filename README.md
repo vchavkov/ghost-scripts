@@ -1,4 +1,7 @@
-|# in the container
+# MacOS gsed
+brew install gnu-sed
+
+# in the container
 /build
 /start web
 
