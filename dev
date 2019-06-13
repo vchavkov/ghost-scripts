@@ -38,5 +38,5 @@ IFS=${old_IFS};
 mkdir -p ${WWW_ROOT}/content/logs
 
 NODE_ENV="development" \
-# DEBUG=ghost:*,knex:*,ghost-config \
+DEBUG=ghost:*,knex:*,ghost-config \
 npx nodemon node_modules/ghost/index.js
