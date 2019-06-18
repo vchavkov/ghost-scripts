@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+ENV_FILE="`pwd`/.env"
+
+old_IFS=$IFS;
+IFS='
+';
+filelines=`cat $ENV_FILE`
+for line in $filelines ; do
+    KEY=$(echo ${line} | cut -d= -f1)
+    IFS="=" read ${KEY} VALUE <<< "${line}"
+    $HOME/.dokku/contrib/dokku_client.sh config:set ${KEY}="${VALUE}"
+done;
+IFS=${old_IFS};
