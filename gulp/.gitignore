@@ -1,0 +1,12 @@
+.DS_store
+.directory
+
+node_modules
+bower_components
+
+# Logs
+logs
+*.log
+npm-debug.log*
+package-lock.json
+yarn.lock
