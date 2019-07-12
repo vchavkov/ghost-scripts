@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-yarn install --production=false --ignore-scripts $@
+yarn --production=false --ignore-scripts $@
