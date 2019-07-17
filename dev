@@ -26,7 +26,8 @@ IFS='
 filelines=`cat $ENV_FILE`
 for line in $filelines ; do
     KEY=$(echo ${line} | cut -d= -f1)
-    IFS="=" read ${KEY} VALUE <<< "${line}"
+    VALUE=$(printf "%s" ${line} | cut -d= -f2 | tr -d "\r\n")
+    # IFS="=" read ${KEY} VALUE <<< "${line}"
     ${SED_CMD} -i "s|%${KEY}%|${VALUE}|g" "$WWW_ROOT/config.development.json";
 done;
 IFS=${old_IFS};
