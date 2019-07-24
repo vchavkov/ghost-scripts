@@ -8,7 +8,8 @@ IFS='
 filelines=`cat $ENV_FILE`
 for line in $filelines ; do
     KEY=$(echo ${line} | cut -d= -f1)
-    IFS="=" read ${KEY} VALUE <<< "${line}"
+    VALUE=$(printf "%s" ${line} | cut -d= -f2 | tr -d "\r\n")
+    # IFS="=" read ${KEY} VALUE <<< "${line}"
     $HOME/.dokku/contrib/dokku_client.sh config:set ${KEY}="${VALUE}"
 done;
 IFS=${old_IFS};
