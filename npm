@@ -1,2 +1,9 @@
 #!/usr/bin/env bash
 npm --ignore-scripts $@
+
+if [ -d "node_modules/ghost" ]; then
+    pushd node_modules/ghost;
+        npm install;
+        npm install -D;
+    popd;
+fi

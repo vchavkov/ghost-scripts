@@ -1,2 +1,8 @@
 #!/usr/bin/env bash
 yarn --production=false --ignore-scripts $@
+
+if [ -d "node_modules/ghost" ]; then
+    pushd node_modules/ghost;
+        yarn install;
+    popd;
+fi
